@@ -1,37 +1,41 @@
--- Active: 1723034383810@@127.0.0.1@3306@alx
-CREATE TABLE Authors (
-    author_id INT AUTO_INCREMENT PRIMARY KEY,
-    author_name VARCHAR(215) NOT NULL
-);
+-- Active: 1723034383810@@127.0.0.1@3306@alx_book_store
+Active:
+
+CREATE DATABASE IF NOT EXISTS alx_book_store;
 
 CREATE TABLE Books (
-    book_id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(130) NOT NULL,
+    book_id INT AUTO INCREMENT PRIMARY KEY,
+    title VARCHAR(130),
     author_id INT,
-    price DOUBLE NOT NULL,
+    price DOUBLE,
     publication_date DATE,
-    FOREIGN KEY (author_id) REFERENCES Authors(author_id)
-);
+    FOREIGN KEY (author_id) REFERENCES Authors(author_id),
+)
+
+CREATE TABLE Authors (
+    author_id INT AUTO INCREMENT PRIMARY KEY,
+    author_name VARCHAR(215)
+)
 
 CREATE TABLE Customers (
-    customer_id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_name VARCHAR(215) NOT NULL,
-    email VARCHAR(215) NOT NULL,
+    customer_id INT AUTO INCREMENT PRIMARY KEY,
+    customer_name VARCHAR(215),
+    customer_email VARCHAR(215),
     address TEXT
-);
+)
 
 CREATE TABLE Orders (
-    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT AUTO INCREMENT PRIMARY KEY,
     customer_id INT,
-    order_date DATE NOT NULL,
+    order_date DATE,
     FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
-);
+)
 
 CREATE TABLE Order_Details (
-    orderdetail_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_details_id INT AUTO INCREMENT PRIMARY KEY,
     order_id INT,
     book_id INT,
-    quantity DOUBLE NOT NULL,
+    quantity DOUBLE,
     FOREIGN KEY (order_id) REFERENCES Orders(order_id),
     FOREIGN KEY (book_id) REFERENCES Books(book_id)
-);
+)
